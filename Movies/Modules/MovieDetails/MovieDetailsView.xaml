@@ -41,6 +41,10 @@
                 <Grid>
                     <Label Text="{Binding MovieData.Year, StringFormat='Year: {0}'}"
                        Padding="20,8,0,0"
+                       TextColor="Red"/>
+                    
+                    <Label Text="{Binding MovieData.Type, StringFormat='Type: {0}'}"
+                       Padding="20,25,0,0"
                        TextColor="Gray"/>
                     <ImageButton x:Name="imageButton"
                                  Source="{Binding IsFavorite, Converter={StaticResource boolToFavorite}}"
@@ -54,7 +58,7 @@
                 </Grid>
 
                     <Label Text="{Binding MovieInformation.Plot}"
-                           Padding="20,0,20,0"
+                           Padding="20,20,20,0"
                            TextColor="Gray" />
           
                     <Label Text="{Binding MovieInformation.Actors}"

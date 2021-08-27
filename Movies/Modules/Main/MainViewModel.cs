@@ -25,7 +25,7 @@ namespace Movies
         {
             var result = await _networkService.GetAsync<ListOfMovies>(ApiConstants.GetMoviesUri(SearchTerm));
             Items = new ObservableCollection<MovieData>(result.Search.Select(x => 
-                new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"), x.Year, x.imdbID)));
+                new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"), x.Year, x.Type, x.imdbID)));
             OnPropertyChanged("Items");
         }
 
