@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             x:Class="Movies.MainView"
+             NavigationPage.HasNavigationBar="False"
+             sharedTransitions:SharedTransitionNavigationPage.TransitionSelectedGroup="{Binding SelectedMovieId }">
+    <ContentPage.Content>
+        <StackLayout Margin="0,40,0,0">
+            <Label Text="Movie Database"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   Padding="10" />
+            <SearchBar Text="{Binding SearchTerm}"
+                       SearchCommand="{Binding PerformSearchCommand}" />
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedMovie}"
+                            SelectionChangedCommand="{Binding MovieChangedCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame Padding="0"
+                                   CornerRadius="50"
+                                   Margin="10,20,10,0"
+                                   HorizontalOptions="Center"
+                                   IsClippedToBounds="True">
+                                <Grid>
+                                    <ffimageloading:CachedImage LoadingPlaceholder="placeholder.png"
+                                                            Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="300"
+                                       sharedTransitions:Transition.Name="MovieImage"
+                                       sharedTransitions:Transition.Group="{Binding ImdbID}"/>
+                                    <Label VerticalOptions="End"
+                                       FontSize="38"
+                                       TextColor="White"
+                                       BackgroundColor="Black"
+                                       Opacity="0.85"
+                                       VerticalTextAlignment="Center"
+                                       Padding="15,0,5,0"
+                                       HeightRequest="70"
+                                       LineBreakMode="TailTruncation"
+                                       Text="{Binding Title}" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center">
+                        <Image Source="placeholder.png"
+                           WidthRequest="200"
+                           HeightRequest="200"
+                           />
+                        <Label HorizontalTextAlignment="Center"
+                           Padding="20,10,10,10"
+                           Text="Enter your search term above..."
+                           FontSize="24"
+                           TextColor="Gray"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
